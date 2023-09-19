@@ -63,14 +63,14 @@ void pall(stack_t **stack)
 
 char **split(char *str)
 {
-	char *token = strtok(str, " \t\n");
+	char *token = strtok(str, " \t\n\r\f");
 	char **array = malloc(sizeof(*array) * 1024);
 	size_t i = 0;
 
 	for (i = 0; token != NULL; i++)
 	{
 		array[i] = token;
-		token = strtok(NULL, " \t\n");
+		token = strtok(NULL, " \t\n\r\f");
 	}
 	array[i] = NULL;
 	return (array);
