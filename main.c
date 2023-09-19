@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include "monty.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -78,7 +79,7 @@ char **split(char *str)
 int main(int ac, char **av)
 {
 	char *line = NULL;
-	size_t size = 1024;
+	size_t size = 0;
 	char **tokens = NULL;
 	unsigned int line_number = 1;
 	FILE *fp;
