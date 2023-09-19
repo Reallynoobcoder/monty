@@ -16,46 +16,48 @@ void free_dlistint(stack_t *head)
 }
 void push(stack_t **stack, unsigned int line_number, char **tokens, char *line)
 {
-    char *arg = tokens[1]; // Assuming the argument is in tokens[1]
+	char *arg = tokens[1];
+	int value;
+	stack_t *new_node;
 
-    if (!arg)
-    {
-        fprintf(stderr, "L%u: usage: push integer\n", line_number);
-        free(line);
-        exit(EXIT_FAILURE);
-    }
+	if (!arg)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		free(line);
+		exit(EXIT_FAILURE);
+	}
 
-    int value = atoi(arg);
+	value = atoi(arg);
 
-    // Create a new stack node
-    stack_t *new_node = malloc(sizeof(stack_t));
-    if (!new_node)
-    {
-        fprintf(stderr, "Error: malloc failed\n");
-        free(line);
-        exit(EXIT_FAILURE);
-    }
+	new_node = malloc(sizeof(stack_t));
+	
+	if (!new_node)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		free(line);
+		exit(EXIT_FAILURE);
+	}
 
-    new_node->n = value;
-    new_node->prev = NULL;
-    new_node->next = *stack;
+	new_node->n = value;
+	new_node->prev = NULL;
+	new_node->next = *stack;
 
-    if (*stack)
-    {
-        (*stack)->prev = new_node;
-    }
+	if (*stack)
+	{
+		(*stack)->prev = new_node;
+	}
 
-    *stack = new_node;
+	*stack = new_node;
 }
-void pall(stack_t **stack, unsigned int line_number)
+void pall(stack_t **stack)
 {
-    stack_t *curr = *stack;
+	stack_t *curr = *stack;
 
-    while (curr)
-    {
-        printf("%d\n", curr->n);
-        curr = curr->next;
-    }
+	while (curr)
+	{
+		printf("%d\n", curr->n);
+		curr = curr->next;
+	}
 }
 
 char **split(char *str)
@@ -75,56 +77,57 @@ char **split(char *str)
 
 int main(int ac, char **av)
 {
-    char *line = NULL;
-    size_t size = 1024;
-    char **tokens = NULL;
-    char *command, *arg;
-    unsigned int line_number = 1;
-    stack_t *stack = NULL;
+	char *line = NULL;
+	size_t size = 1024;
+	char **tokens = NULL;
+	unsigned int line_number = 1;
+	FILE *fp;
 
-    if (ac != 2)
-    {
-        fprintf(stderr, "USAGE: monty file\n");
-        exit(EXIT_FAILURE);
-    }
+	stack_t *stack = NULL;
 
-    FILE *fp = fopen(av[1], "r");
-
-    if (fp == NULL)
-    {
-        fprintf(stderr, "Error: Can't open file %s\n", av[1]);
+	if (ac != 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
-    }
-    while(getline(&line, &size, fp) != EOF)
-    {
-        tokens = split(line);
-        if (tokens[0] == NULL)
-        {
-            free(tokens);
-            continue;
-        }
-        if (strcmp(tokens[0], "push") == 0)
-        {
-            push(&stack, line_number, tokens, line);
+	}
 
-        }
-        else if (strcmp(tokens[0], "pall") == 0)
-        {
-            pall(&stack, line_number);
-        }
-        else
-        {
-            fprintf(stderr, "L%u: unknown instruction %s\n", line_number, tokens[0]);
-            free(tokens);
-            free(line);
-            exit(EXIT_FAILURE);
-        }
-        free(tokens);
-        line_number++;
+	fp = fopen(av[1], "r");
 
-}
-    free_dlistint(stack);
-    free(line);
-    fclose(fp);
-    return (0);
+	if (fp == NULL)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
+		exit(EXIT_FAILURE);
+	}
+	while (getline(&line, &size, fp) != -1)
+	{
+		tokens = split(line);
+		if (tokens[0] == NULL)
+		{
+			free(tokens);
+			continue;
+		}
+		if (strcmp(tokens[0], "push") == 0)
+		{
+			push(&stack, line_number, tokens, line);
+
+		}
+		else if (strcmp(tokens[0], "pall") == 0)
+		{
+			pall(&stack);
+		}
+		else
+		{
+			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, tokens[0]);
+			free(tokens);
+			free(line);
+			exit(EXIT_FAILURE);
+		}
+		free(tokens);
+		line_number++;
+
+	}
+	free_dlistint(stack);
+	free(line);
+	fclose(fp);
+	return (0);
 }
