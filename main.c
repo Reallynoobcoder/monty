@@ -59,7 +59,12 @@ void push(stack_t **stack, unsigned int line_number, char **tokens, char *line)
 }
 void pall(stack_t **stack)
 {
-	stack_t *curr = *stack;
+	stack_t *curr;
+	
+	if (stack == NULL)
+        	return;
+	
+	curr = *stack;
 
 	while (curr)
 	{
