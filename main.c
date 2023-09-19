@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 void free_dlistint(stack_t *head)
 {
@@ -18,7 +19,7 @@ void free_dlistint(stack_t *head)
 void push(stack_t **stack, unsigned int line_number, char **tokens, char *line)
 {
 	char *arg = tokens[1];
-	int value;
+	int value, i;
 	stack_t *new_node;
 
 	if (!arg)
@@ -27,11 +28,17 @@ void push(stack_t **stack, unsigned int line_number, char **tokens, char *line)
 		free(line);
 		exit(EXIT_FAILURE);
 	}
-
+	for (i = 0; arg[i] != '\0'; i++) {
+		if (!isdigit(arg[i])) {
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
+			free(line);
+			exit(EXIT_FAILURE);
+		}
+	}
 	value = atoi(arg);
 
 	new_node = malloc(sizeof(stack_t));
-	
+
 	if (!new_node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -120,6 +127,7 @@ int main(int ac, char **av)
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, tokens[0]);
 			free(tokens);
+			free_dlistint(stack);
 			free(line);
 			exit(EXIT_FAILURE);
 		}
