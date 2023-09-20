@@ -37,6 +37,7 @@ void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
 
 
 instruction_t opcodes_Fun[] = {
@@ -45,6 +46,7 @@ instruction_t opcodes_Fun[] = {
     {"pint", pint},
     {"pop", pop},
     {"swap", swap},
+    {"add", add},
     {NULL, NULL} 
 };
 #endif
