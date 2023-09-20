@@ -28,8 +28,10 @@ void push(stack_t **stack, unsigned int line_number, char **tokens, char *line)
 		free(line);
 		exit(EXIT_FAILURE);
 	}
-	for (i = 0; arg[i] != '\0'; i++) {
-		if (!isdigit(arg[i])) {
+	for (i = 0; arg[i] != '\0'; i++)
+	{
+		if (!isdigit(arg[i]))
+		{
 			fprintf(stderr, "L%u: usage: push integer\n", line_number);
 			free(line);
 			exit(EXIT_FAILURE);
@@ -60,10 +62,10 @@ void push(stack_t **stack, unsigned int line_number, char **tokens, char *line)
 void pall(stack_t **stack)
 {
 	stack_t *curr;
-	
+
 	if (stack == NULL)
-        	return;
-	
+		return;
+
 	curr = *stack;
 
 	while (curr)
