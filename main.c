@@ -10,13 +10,14 @@ char **tokens = NULL;
 
 int isnumeric(const char *str)
 {
-    while (*str)
+    int i;
+    
+    for (i = 0; str[i] != '\0'; i++)
     {
-        if (!isdigit(*str))
-            return 0;
-        str++;
+        if (!isdigit(str[i]))
+            return (0);
     }
-    return 1;
+    return (1);
 }
 
 void free_dlistint(stack_t *head)
