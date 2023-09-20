@@ -86,6 +86,28 @@ void pint(stack_t **stack, unsigned int line_number)
 	}
 	printf("%d\n", (*stack)->n);
 }
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *curr;
+
+	if (!*stack)
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	curr = *stack;
+	if (curr->next == NULL)
+	{
+		*stack = NULL;
+		free(curr);
+	}
+	else
+	{
+	*stack = curr->next;
+	curr->next->prev = NULL;
+	free(curr);
+	}
+}
 char **split(char *str)
 {
 	char *token = strtok(str, " \t\n\r\f");
