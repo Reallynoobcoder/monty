@@ -56,6 +56,7 @@ instruction_t opcodes_Fun[] = {
     {"mul", mul},
     {"nop", nop},
     {"mod", mod},
+    {"#", nop},
     {NULL, NULL} 
 };
 #endif
