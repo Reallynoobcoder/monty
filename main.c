@@ -8,6 +8,17 @@
 char *line = NULL;
 char **tokens = NULL;
 
+int isnumeric(const char *str)
+{
+    while (*str)
+    {
+        if (!isdigit(*str))
+            return 0;
+        str++;
+    }
+    return 1;
+}
+
 void free_dlistint(stack_t *head)
 {
     stack_t *temp;
@@ -86,17 +97,6 @@ char **split(char *str)
     }
     array[i] = NULL;
     return (array);
-}
-
-int isnumeric(const char *str)
-{
-    while (*str)
-    {
-        if (!isdigit(*str))
-            return 0;
-        str++;
-    }
-    return 1;
 }
 
 int main(int ac, char **av)
