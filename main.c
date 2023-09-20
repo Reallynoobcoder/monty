@@ -167,7 +167,7 @@ int main(int ac, char **av)
 {
 	size_t size = 0;
 	unsigned int line_number = 1;
-    int found = 0, i;
+    int i;
 	stack_t *stack = NULL;
 
 	if (ac != 2)
@@ -197,7 +197,7 @@ int main(int ac, char **av)
 		    if (strcmp(tokens[0], opcodes_Fun[i].opcode) == 0)
 		    {
 		        opcodes_Fun[i].f(&stack, line_number);
-                found = 1;
+               
                 break;
 		    }
 		}
@@ -211,7 +211,7 @@ int main(int ac, char **av)
 			pall(&stack, line_number);
 		}*/
 		
-		if (!found)
+		if (opcodes_Fun[i].opcode == NULL)
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, tokens[0]);
 			free(tokens);
