@@ -6,6 +6,7 @@
 #include <ctype.h>
 char *line = NULL;
 char **tokens = NULL;
+FILE *fp;
 void free_dlistint(stack_t *head)
 {
 	stack_t *temp;
@@ -82,6 +83,10 @@ void pint(stack_t **stack, unsigned int line_number)
 	if (stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		free(tokens);
+			free_dlistint(*stack);
+			free(line);
+		fclose(fp);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*stack)->n);
@@ -162,7 +167,6 @@ int main(int ac, char **av)
 {
 	size_t size = 0;
 	unsigned int line_number = 1;
-	FILE *fp;
     int found = 0, i;
 	stack_t *stack = NULL;
 
