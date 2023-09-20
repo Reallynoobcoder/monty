@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+char *line = NULL;
+char **tokens = NULL;
 void free_dlistint(stack_t *head)
 {
 	stack_t *temp;
@@ -16,7 +17,7 @@ void free_dlistint(stack_t *head)
 		head = temp;
 	}
 }
-void push(stack_t **stack, unsigned int line_number, char **tokens, char *line)
+void push(stack_t **stack, unsigned int line_number)
 {
 	char *arg = tokens[1];
 	int value, i;
@@ -59,9 +60,11 @@ void push(stack_t **stack, unsigned int line_number, char **tokens, char *line)
 
 	*stack = new_node;
 }
-void pall(stack_t **stack)
+void pall(stack_t **stack, unsigned int line_number)
 {
-	stack_t *curr;
+    stack_t *curr;
+    (void)line_number;
+	
 
 	if (stack == NULL)
 		return;
@@ -92,12 +95,10 @@ char **split(char *str)
 
 int main(int ac, char **av)
 {
-	char *line = NULL;
 	size_t size = 0;
-	char **tokens = NULL;
 	unsigned int line_number = 1;
 	FILE *fp;
-
+    int found = 0, i;
 	stack_t *stack = NULL;
 
 	if (ac != 2)
@@ -121,16 +122,27 @@ int main(int ac, char **av)
 			free(tokens);
 			continue;
 		}
-		if (strcmp(tokens[0], "push") == 0)
+	
+		for (i = 0; opcodes_Fun[i].opcode != NULL; i++)
 		{
-			push(&stack, line_number, tokens, line);
+		    if (strcmp(tokens[0], opcodes_Fun[i].opcode) == 0)
+		    {
+		        opcodes_Fun[i].f(&stack, line_number);
+                found = 1;
+                break;
+		    }
+		}
+	/*	if (strcmp(tokens[0], "push") == 0)
+		{
+			push(&stack, line_number);
 
 		}
 		else if (strcmp(tokens[0], "pall") == 0)
 		{
-			pall(&stack);
-		}
-		else
+			pall(&stack, line_number);
+		}*/
+		
+		if (!found)
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, tokens[0]);
 			free(tokens);
