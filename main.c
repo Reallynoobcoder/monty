@@ -175,6 +175,20 @@ void divide(stack_t **stack, unsigned int line_number)
 	temp->next->n = temp->next->n / temp->n;
 	pop(stack, line_number);
 }
+void mul(stack_t **stack, unsigned int line_number)
+{
+    stack_t *temp;
+
+	if (!*stack || !(*stack)->next)
+	{
+		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp = *stack;
+	
+	temp->next->n = temp->next->n * temp->n;
+	pop(stack, line_number);
+}
 void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
