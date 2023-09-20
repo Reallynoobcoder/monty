@@ -34,9 +34,11 @@ typedef struct instruction_s
 
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
 instruction_t opcodes_Fun[] = {
     {"push", push},
     {"pall", pall},
+    {"pint", pint},
     {NULL, NULL} 
 };
 #endif
