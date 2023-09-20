@@ -189,6 +189,24 @@ void mul(stack_t **stack, unsigned int line_number)
 	temp->next->n = temp->next->n * temp->n;
 	pop(stack, line_number);
 }
+void mod(stack_t **stack, unsigned int line_number)
+{
+    stack_t *temp;
+
+	if (!*stack || !(*stack)->next)
+	{
+		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp = *stack;
+	if (temp->n == 0)
+	{
+	    fprintf(stderr, "L%d: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp->next->n = temp->next->n % temp->n;
+	pop(stack, line_number);
+}
 void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
