@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-    
 char *line = NULL;
 char **tokens = NULL;
+FILE *fp;
 void free_dlistint(stack_t *head)
 {
 	stack_t *temp;
@@ -83,6 +83,10 @@ void pint(stack_t **stack, unsigned int line_number)
 	if (stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		free(tokens);
+			free_dlistint(*stack);
+			free(line);
+		fclose(fp);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*stack)->n);
@@ -127,36 +131,30 @@ void swap(stack_t **stack, unsigned int line_number)
 
 void add(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
-	
-    tmp = *stack;
-    
-	if (!tmp || !tmp->next)
+	stack_t *temp;
+
+	if (!*stack || !(*stack)->next)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	temp = *stack;
 	
-
-	tmp->next->n = tmp->next->n + tmp->n;
+	temp->next->n = temp->next->n + temp->n;
 	pop(stack, line_number);
 }
-
 void sub(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
-	
-    tmp = *stack;
-    
-	if (!tmp || !tmp->next)
+    stack_t *temp;
+
+	if (!*stack || !(*stack)->next)
 	{
-	    fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	temp = *stack;
 	
-	
-	
-	tmp->next->n = tmp->next->n - tmp->n;
+	temp->next->n = temp->next->n - temp->n;
 	pop(stack, line_number);
 }
 
@@ -185,8 +183,7 @@ int main(int ac, char **av)
 {
 	size_t size = 0;
 	unsigned int line_number = 1;
-	FILE *fp;
-    int found = 0, i;
+    int i;
 	stack_t *stack = NULL;
 
 	if (ac != 2)
@@ -216,12 +213,21 @@ int main(int ac, char **av)
 		    if (strcmp(tokens[0], opcodes_Fun[i].opcode) == 0)
 		    {
 		        opcodes_Fun[i].f(&stack, line_number);
-                found = 1;
+               
                 break;
 		    }
 		}
+	/*	if (strcmp(tokens[0], "push") == 0)
+		{
+			push(&stack, line_number);
+
+		}
+		else if (strcmp(tokens[0], "pall") == 0)
+		{
+			pall(&stack, line_number);
+		}*/
 		
-		if (!found)
+		if (opcodes_Fun[i].opcode == NULL)
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, tokens[0]);
 			free(tokens);
