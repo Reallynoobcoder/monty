@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-    
+
 char *line = NULL;
 char **tokens = NULL;
 void free_dlistint(stack_t *head)
@@ -127,39 +127,17 @@ void swap(stack_t **stack, unsigned int line_number)
 
 void add(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
 	
-    tmp = *stack;
-    
-	if (!tmp || !tmp->next)
+
+	if (!*stack || !(*stack)->next)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	
-
-	tmp->next->n = tmp->next->n + tmp->n;
+	(*stack)->next->n = (*stack)->next->n + (*stack)->n;
 	pop(stack, line_number);
 }
-
-void sub(stack_t **stack, unsigned int line_number)
-{
-	stack_t *tmp;
-	
-    tmp = *stack;
-    
-	if (!tmp || !tmp->next)
-	{
-	    fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	
-	
-	
-	tmp->next->n = tmp->next->n - tmp->n;
-	pop(stack, line_number);
-}
-
 void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
@@ -220,6 +198,15 @@ int main(int ac, char **av)
                 break;
 		    }
 		}
+	/*	if (strcmp(tokens[0], "push") == 0)
+		{
+			push(&stack, line_number);
+
+		}
+		else if (strcmp(tokens[0], "pall") == 0)
+		{
+			pall(&stack, line_number);
+		}*/
 		
 		if (!found)
 		{
