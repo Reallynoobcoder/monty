@@ -128,15 +128,16 @@ void swap(stack_t **stack, unsigned int line_number)
 void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
-
-	if (!*stack || !(*stack)->next)
+	
+    tmp = *stack;
+    
+	if (!tmp || !tmp->next)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	
-	tmp = *stack;
-	
+
 	tmp->next->n = tmp->next->n + tmp->n;
 	pop(stack, line_number);
 }
@@ -144,15 +145,16 @@ void add(stack_t **stack, unsigned int line_number)
 void sub(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
+	
+    tmp = *stack;
     
-    
-	if (!*stack || !(*stack)->next)
+	if (!tmp || !tmp->next)
 	{
 	    fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	
-	tmp = *stack;
+	
 	
 	tmp->next->n = tmp->next->n - tmp->n;
 	pop(stack, line_number);
