@@ -22,6 +22,7 @@ void push(stack_t **stack, unsigned int line_number)
 {
 	char *arg = tokens[1];
 	int value, i;
+	int is_negative;
 	stack_t *new_node;
 
 	if (!arg)
@@ -33,11 +34,11 @@ void push(stack_t **stack, unsigned int line_number)
 		fclose(fp);
 		exit(EXIT_FAILURE);
 	}
-	int is_negative = 0;
+	is_negative = 0;
     if (arg[0] == '-')
     {
         is_negative = 1;
-        // Move the pointer one position ahead to skip the '-' character
+        /* Move the pointer one position ahead to skip the '-' character */
         arg++;
     }
 	for (i = 0; arg[i] != '\0'; i++)
