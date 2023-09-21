@@ -21,7 +21,6 @@ extern char **tokens;
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO
  */
-
 typedef struct stack_s
 {
 	int n;
@@ -37,7 +36,6 @@ typedef struct stack_s
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO
  */
-
 typedef struct instruction_s
 {
 	char *opcode;
