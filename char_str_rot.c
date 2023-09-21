@@ -58,6 +58,11 @@ void rotl(stack_t **stack, unsigned int line_number)
 	*stack = new_h;
 }
 
+/**
+ * rotr - Rotates the stack to the bottom.
+ * @stack: A pointer to the top of the stack.
+ * @line_number: The line number in the Monty file where rotr was called.
+ */
 void rotr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_h, *tmp, *new_last;
