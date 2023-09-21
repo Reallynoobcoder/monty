@@ -17,29 +17,28 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	is_negative = 0;
-    if (arg[0] == '-')
-    {
-        is_negative = 1;
-        /* Move the pointer one position ahead to skip the '-' character */
-        arg++;
-    }
+	if (arg[0] == '-')
+	{
+		is_negative = 1;
+		arg++;
+	}
 	for (i = 0; arg[i] != '\0'; i++)
 	{
 		if (!isdigit(arg[i]))
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", line_number);
 			free(tokens);
-		free_dlistint(*stack);
-		free(line);
-		fclose(fp);
+			free_dlistint(*stack);
+			free(line);
+			fclose(fp);
 			exit(EXIT_FAILURE);
 		}
 	}
 	value = atoi(arg);
-    if (is_negative)
-    {
-        value *= -1;
-    }
+	if (is_negative)
+	{
+		value *= -1;
+	}
 	new_node = malloc(sizeof(stack_t));
 
 	if (!new_node)
@@ -60,11 +59,18 @@ void push(stack_t **stack, unsigned int line_number)
 
 	*stack = new_node;
 }
+
+/**
+ * pall - Prints all values on the stack.
+ * @stack: Double pointer to the beginning of the stack.
+ * @line_number: The line number in the Monty bytecode file.
+ */
+
 void pall(stack_t **stack, unsigned int line_number)
 {
-    stack_t *curr;
-    (void)line_number;
-	
+	stack_t *curr;
+	(void)line_number;
+
 
 	if (stack == NULL)
 		return;
