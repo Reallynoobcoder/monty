@@ -5,7 +5,6 @@
  * @stack: Double pointer to the beginning of the stack.
  * @line_number: The line number in the Monty bytecode file.
  */
-
 void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
@@ -26,7 +25,6 @@ void add(stack_t **stack, unsigned int line_number)
  * @stack: Double pointer to the beginning of the stack.
  * @line_number: The line number in the Monty bytecode file.
  */
-
 void sub(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
@@ -47,7 +45,6 @@ void sub(stack_t **stack, unsigned int line_number)
  * @stack: Double pointer to the beginning of the stack.
  * @line_number: The line number in the Monty bytecode file.
  */
-
 void divide(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
@@ -72,7 +69,6 @@ void divide(stack_t **stack, unsigned int line_number)
  * @stack: Double pointer to the beginning of the stack.
  * @line_number: The line number in the Monty bytecode file.
  */
-
 void mul(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
@@ -94,7 +90,6 @@ void mul(stack_t **stack, unsigned int line_number)
  * @stack: Double pointer to the beginning of the stack.
  * @line_number: The line number in the Monty bytecode file.
  */
-
 void mod(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
