@@ -1,14 +1,16 @@
 #ifndef MONTY_H
 #define MONTY_H
+
 #define _POSIX_C_SOURCE 200809L
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+
 extern char *line;
 extern char **tokens;
-
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -35,6 +37,7 @@ typedef struct stack_s
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO
  */
+
 typedef struct instruction_s
 {
 	char *opcode;
@@ -59,4 +62,5 @@ void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
+
 #endif
