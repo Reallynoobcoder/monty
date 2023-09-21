@@ -6,9 +6,10 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
-char *line = NULL;
-char **tokens = NULL;
-FILE *fp;
+extern char *line;
+extern char **tokens;
+extern FILE *fp;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -40,6 +41,8 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+extern instruction_t opcodes_Fun[];
+
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
@@ -52,19 +55,5 @@ void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 
-instruction_t opcodes_Fun[] = {
-    {"push", push},
-    {"pall", pall},
-    {"pint", pint},
-    {"pop", pop},
-    {"swap", swap},
-    {"add", add},
-    {"sub", sub},
-    {"div", divide},
-    {"mul", mul},
-    {"nop", nop},
-    {"mod", mod},
-    {"#", nop},
-    {NULL, NULL} 
-};
+
 #endif
