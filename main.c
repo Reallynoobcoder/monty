@@ -51,6 +51,7 @@ int main(int ac, char **av)
 		{"mod", mod},
 		{"mod", mod},
 		{"pchar", pchar},
+		{"pstr", pstr},
 		{NULL, NULL}
 	};
 	char *line = NULL;
