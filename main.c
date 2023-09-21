@@ -1,4 +1,5 @@
 #include "monty.h"
+
 char **tokens = NULL;
 
 void free_dlistint(stack_t *head)
@@ -79,7 +80,7 @@ int main(int ac, char **av)
 	while (getline(&line, &size, fp) != -1)
 	{
 		if (line[0] == '#')
-            		continue;
+			continue;
 		tokens = split(line);
 		if (tokens[0] == NULL)
 		{
