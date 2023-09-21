@@ -33,6 +33,13 @@ void push(stack_t **stack, unsigned int line_number)
 		fclose(fp);
 		exit(EXIT_FAILURE);
 	}
+	int is_negative = 0;
+    if (arg[0] == '-')
+    {
+        is_negative = 1;
+        // Move the pointer one position ahead to skip the '-' character
+        arg++;
+    }
 	for (i = 0; arg[i] != '\0'; i++)
 	{
 		if (!isdigit(arg[i]))
@@ -46,7 +53,10 @@ void push(stack_t **stack, unsigned int line_number)
 		}
 	}
 	value = atoi(arg);
-
+    if (is_negative)
+    {
+        value *= -1;
+    }
 	new_node = malloc(sizeof(stack_t));
 
 	if (!new_node)
