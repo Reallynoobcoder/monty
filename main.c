@@ -73,6 +73,8 @@ int main(int ac, char **av)
 	}
 	while (getline(&line, &size, fp) != -1)
 	{
+		if (line[0] == '#')
+            		continue;
 		tokens = split(line);
 		if (tokens[0] == NULL)
 		{
