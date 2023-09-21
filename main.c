@@ -53,6 +53,7 @@ int main(int ac, char **av)
 		{"pchar", pchar},
 		{"pstr", pstr},
 		{"rotl", rotl},
+		{"rotr", rotr},
 		{NULL, NULL}
 	};
 	char *line = NULL;
