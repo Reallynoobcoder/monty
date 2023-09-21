@@ -235,7 +235,13 @@ char **split(char *str)
 	char *token = strtok(str, " \t\n\r\f");
 	char **array = malloc(sizeof(*array) * 1024);
 	size_t i = 0;
-
+ if (!array)
+    {
+        fprintf(stderr, "Error: malloc failed\n");
+        free(line);
+	    fclose(fp);
+        exit(EXIT_FAILURE);
+    }
 	for (i = 0; token != NULL; i++)
 	{
 		array[i] = token;
@@ -290,6 +296,7 @@ int main(int ac, char **av)
 			free(tokens);
 			free_dlistint(stack);
 			free(line);
+			fclose(fp);
 			exit(EXIT_FAILURE);
 		}
 		free(tokens);
