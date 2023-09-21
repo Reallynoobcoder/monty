@@ -48,7 +48,8 @@ int main(int ac, char **av)
 		{"mul", mul},
 		{"nop", nop},
 		{"mod", mod},
-		{"#", nop},
+		{"mod", mod},
+		{"pchar", pchar},
 		{NULL, NULL}
 	};
 	char *line = NULL;
