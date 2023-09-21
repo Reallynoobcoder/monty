@@ -27,7 +27,10 @@ void push(stack_t **stack, unsigned int line_number)
 	if (!arg)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		free(tokens);
+		free_dlistint(*stack);
 		free(line);
+		fclose(fp);
 		exit(EXIT_FAILURE);
 	}
 	for (i = 0; arg[i] != '\0'; i++)
@@ -35,7 +38,10 @@ void push(stack_t **stack, unsigned int line_number)
 		if (!isdigit(arg[i]))
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", line_number);
-			free(line);
+			free(tokens);
+		free_dlistint(*stack);
+		free(line);
+		fclose(fp);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -266,15 +272,6 @@ int main(int ac, char **av)
                 break;
 		    }
 		}
-	/*	if (strcmp(tokens[0], "push") == 0)
-		{
-			push(&stack, line_number);
-
-		}
-		else if (strcmp(tokens[0], "pall") == 0)
-		{
-			pall(&stack, line_number);
-		}*/
 		
 		if (opcodes_Fun[i].opcode == NULL)
 		{
