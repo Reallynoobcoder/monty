@@ -19,11 +19,10 @@ char **split(char *str)
 	char *token = strtok(str, " \t\n\r\f");
 	char **array = malloc(sizeof(*array) * 1024);
 	size_t i = 0;
+
 	if (!array)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		
-		
 		exit(EXIT_FAILURE);
 	}
 	for (i = 0; token != NULL; i++)
@@ -37,23 +36,23 @@ char **split(char *str)
 
 int main(int ac, char **av)
 {
-    instruction_t opcodes_Fun[] = {
-	{"push", push},
-	{"pall", pall},
-	{"pint", pint},
-	{"pop", pop},
-	{"swap", swap},
-	{"add", add},
-	{"sub", sub},
-	{"div", divide},
-	{"mul", mul},
-	{"nop", nop},
-	{"mod", mod},
-	{"#", nop},
-	{NULL, NULL} 
-};
-    char *line = NULL;
-    FILE *fp;
+	instruction_t opcodes_Fun[] = {
+		{"push", push},
+		{"pall", pall},
+		{"pint", pint},
+		{"pop", pop},
+		{"swap", swap},
+		{"add", add},
+		{"sub", sub},
+		{"div", divide},
+		{"mul", mul},
+		{"nop", nop},
+		{"mod", mod},
+		{"#", nop},
+		{NULL, NULL}
+	};
+	char *line = NULL;
+	FILE *fp;
 	size_t size = 0;
 	unsigned int line_number = 1;
 	int i;
