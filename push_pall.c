@@ -1,5 +1,10 @@
 #include "monty.h"
 
+/**
+ * push - Pushes an element onto the stack.
+ * @stack: A pointer to the top of the stack.
+ * @line_number: The line number in the Monty file where push was called.
+ */
 void push(stack_t **stack, unsigned int line_number)
 {
 	char *arg = tokens[1];
