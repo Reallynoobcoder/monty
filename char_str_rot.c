@@ -24,3 +24,26 @@ void pstr(stack_t **stack, unsigned int line_number)
 	}
 }
 
+void rotl(stack_t **stack, unsigned int line_number)
+{
+   stack_t *new_h, *temp, *new_last;
+
+	(void)line_number;
+
+	if (*stack == NULL || (*stack != NULL && (*stack)->next == NULL))
+		return;
+
+	new_last = *stack;
+	temp = *stack;
+
+	while (temp->next)
+		temp = temp->next;
+
+	new_h = (*stack)->next;
+	new_last->next = NULL;
+	new_last->prev = temp;
+	temp->next = new_last;
+	new_h->prev = NULL;
+	*stack = new_h;
+
+}
