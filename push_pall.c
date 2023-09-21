@@ -12,8 +12,8 @@ void push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		free(tokens);
 		free_dlistint(*stack);
-		free(line);
-		fclose(fp);
+		
+		
 		exit(EXIT_FAILURE);
 	}
 	is_negative = 0;
@@ -29,8 +29,8 @@ void push(stack_t **stack, unsigned int line_number)
 			fprintf(stderr, "L%u: usage: push integer\n", line_number);
 			free(tokens);
 			free_dlistint(*stack);
-			free(line);
-			fclose(fp);
+			
+			
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -44,7 +44,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (!new_node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		free(line);
+		
 		exit(EXIT_FAILURE);
 	}
 

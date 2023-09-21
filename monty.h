@@ -8,7 +8,7 @@
 #include <stdlib.h>
 extern char *line;
 extern char **tokens;
-extern FILE *fp;
+
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
