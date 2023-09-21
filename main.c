@@ -47,6 +47,7 @@ int main(int ac, char **av)
 		{"div", divide},
 		{"mul", mul},
 		{"nop", nop},
+		{"#", nop},
 		{"mod", mod},
 		{"mod", mod},
 		{"pchar", pchar},
