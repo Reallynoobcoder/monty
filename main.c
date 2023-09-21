@@ -1,8 +1,6 @@
 #include "monty.h"
 
-char *line = NULL;
-char **tokens = NULL;
-FILE *fp;
+
 void free_dlistint(stack_t *head)
 {
 	stack_t *temp;

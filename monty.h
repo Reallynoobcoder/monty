@@ -6,6 +6,9 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+char *line = NULL;
+char **tokens = NULL;
+FILE *fp;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
