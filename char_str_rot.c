@@ -1,5 +1,10 @@
 #include "monty.h"
 
+/**
+ * pstr - Prints the string represented by the stack's ASCII values.
+ * @stack: A pointer to the top of the stack.
+ * @line_number: The line number in the Monty file where pstr was called.
+ */
 void pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
