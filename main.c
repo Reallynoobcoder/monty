@@ -60,7 +60,7 @@ int main(int ac, char **av)
 	char *line = NULL;
 	FILE *fp;
 	size_t size = 0;
-	unsigned int line_number = 1;
+	unsigned int line_number = 0;
 	int i;
 	stack_t *stack = NULL;
 
@@ -79,6 +79,7 @@ int main(int ac, char **av)
 	}
 	while (getline(&line, &size, fp) != -1)
 	{
+	    line_number++;
 		if (line[0] == '#')
 			continue;
 		tokens = split(line);
@@ -108,7 +109,6 @@ int main(int ac, char **av)
 			exit(EXIT_FAILURE);
 		}
 		free(tokens);
-		line_number++;
 
 	}
 	free_dlistint(stack);
