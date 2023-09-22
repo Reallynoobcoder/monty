@@ -2,6 +2,13 @@
 
 char **tokens = NULL;
 
+/**
+ * free_dlistint - Frees a dlistint_t list.
+ * @head: Pointer to the head of the list.
+ *
+ * Description: This function frees the memory allocated for a doubly linked
+ * list of integers and sets the head pointer to NULL.
+ */
 void free_dlistint(stack_t *head)
 {
 	stack_t *temp;
@@ -14,7 +21,13 @@ void free_dlistint(stack_t *head)
 	}
 }
 
-
+/**
+ * split - Split a string into an array of words.
+ * @str: The string to split.
+ *
+ * Return: A dynamically allocated array of strings containing the words.
+ *         The last element of the array is NULL.
+ */
 char **split(char *str)
 {
 	char *token = strtok(str, " \t\n\r\f");
@@ -35,6 +48,12 @@ char **split(char *str)
 	return (array);
 }
 
+/**
+ * main - Entry point of the program
+ * @ac: Number of command-line arguments
+ * @av: Array of command-line arguments
+ * Return: 0 on success, 1 on error
+*/
 int main(int ac, char **av)
 {
 	instruction_t opcodes_Fun[] = {
