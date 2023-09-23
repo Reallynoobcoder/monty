@@ -60,29 +60,26 @@ void rotl(stack_t **stack, unsigned int line_number)
 
 /**
  * rotr - Rotates the stack to the bottom.
- * @stack: A pointer to the top of the stack.
+ * @top: A pointer to the top of the stack.
  * @line_number: The line number in the Monty file where rotr was called.
  */
-void rotr(stack_t **stack, unsigned int line_number)
+void rotr(stack_t **top, unsigned int line_number)
 {
-	stack_t *new_h, *tmp, *new_last;
+	 stack_t *temp = *top;
+    (void)line_number;
 
-	(void)line_number;
-	if (*stack == NULL || (*stack != NULL && (*stack)->next == NULL))
-		return;
+    if (*top == NULL || (*top)->next == NULL)
+        return;
 
-	new_last = *stack;
-	tmp = *stack;
+    while (temp->next != NULL)
+        temp = temp->next;
 
-	while (tmp->next)
-		tmp = tmp->next;
-
-	new_h = (*stack)->next;
-	new_last->next = NULL;
-	new_last->prev = tmp;
-	tmp->next = new_last;
-	new_h->prev = NULL;
-	*stack = new_h;
+    /* Move the last element to the top of the stack */
+    temp->next = *top;
+    (*top)->prev = temp;
+    *top = temp;
+    temp->prev->next = NULL;
+    temp->prev = NULL;
 }
 
 /**
