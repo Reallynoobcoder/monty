@@ -54,7 +54,7 @@ char **split(char *str)
  * @ac: Number of command-line arguments
  * @av: Array of command-line arguments
  * Return: 0 on success, 1 on error
-*/
+ */
 int main(int ac, char **av)
 {
 	instruction_t opcodes_Fun[] = {
@@ -99,7 +99,7 @@ int main(int ac, char **av)
 	}
 	while (getline(&line, &size, fp) != -1)
 	{
-	    line_number++;
+		line_number++;
 		if (line[0] == '#')
 			continue;
 		tokens = split(line);
@@ -109,15 +109,15 @@ int main(int ac, char **av)
 			continue;
 		}
 		if (strcmp(tokens[0], "stack") == 0)
-        {
-            mode = STACK;
-            continue;
-        }
-        else if (strcmp(tokens[0], "queue") == 0)
-        {
-            mode = QUEUE;
-            continue;
-        }
+		{
+			mode = STACK;
+			continue;
+		}
+		else if (strcmp(tokens[0], "queue") == 0)
+		{
+			mode = QUEUE;
+			continue;
+		}
 		for (i = 0; opcodes_Fun[i].opcode != NULL; i++)
 		{
 			if (strcmp(tokens[0], opcodes_Fun[i].opcode) == 0)
