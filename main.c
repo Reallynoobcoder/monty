@@ -1,6 +1,7 @@
 #include "monty.h"
 
 char **tokens = NULL;
+int mode = STACK;
 
 /**
  * free_dlistint - Frees a dlistint_t list.
@@ -107,7 +108,16 @@ int main(int ac, char **av)
 			free(tokens);
 			continue;
 		}
-
+		if (strcmp(tokens[0], "stack") == 0)
+        {
+            mode = STACK;
+            continue;
+        }
+        else if (strcmp(tokens[0], "queue") == 0)
+        {
+            mode = QUEUE;
+            continue;
+        }
 		for (i = 0; opcodes_Fun[i].opcode != NULL; i++)
 		{
 			if (strcmp(tokens[0], opcodes_Fun[i].opcode) == 0)

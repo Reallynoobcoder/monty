@@ -9,8 +9,12 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+#define STACK 0
+#define QUEUE 1
+
 extern char *line;
 extern char **tokens;
+extern int mode;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)

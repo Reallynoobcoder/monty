@@ -1,63 +1,84 @@
 #include "monty.h"
 
+int is_Number(char *arg)
+{
+    int i;
+    
+    for (i = 0; arg[i]; i++)
+    {
+        if (!isdigit(arg[i]))
+            return (0);
+    }
+    return (1);
+}
 /**
  * push - Pushes an element onto the stack.
- * @stack: A pointer to the top of the stack.
+ * @top: A pointer to the top of the stack.
  * @line_number: The line number in the Monty file where push was called.
  */
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **top, unsigned int line_number)
 {
-	char *arg = tokens[1];
-	int value, i;
-	int is_negative;
-	stack_t *new_node;
+    char *arg = tokens[1];
+    int val, is_Negative;
+    stack_t *new;
 
-	if (!arg)
-	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		free(tokens);
-		free_dlistint(*stack);
-		exit(EXIT_FAILURE);
-	}
-	is_negative = 0;
-	if (arg[0] == '-')
-	{
-		is_negative = 1;
-		arg++;
-	}
-	for (i = 0; arg[i] != '\0'; i++)
-	{
-		if (!isdigit(arg[i]))
-		{
-			fprintf(stderr, "L%u: usage: push integer\n", line_number);
-			free(tokens);
-			free_dlistint(*stack);
-			exit(EXIT_FAILURE);
-		}
-	}
-	value = atoi(arg);
-	if (is_negative)
-	{
-		value *= -1;
-	}
-	new_node = malloc(sizeof(stack_t));
+    if (!arg)
+    {
+        fprintf(stderr, "L%u: usage: push integer\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+    is_Negative = 0;
+    if (arg[0] == '-')
+    {
+        is_Negative = 1;
+        arg++;
+    }
+    if (!is_Number(arg))
+    {
+        fprintf(stderr, "L%u: usage: push integer\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+    val = atoi(arg);
+    if (is_Negative)
+        val = -val;
+    new = malloc(sizeof(stack_t));
 
-	if (!new_node)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+    if (new == NULL)
+    {
+        fprintf(stderr, "Error: malloc failed\n");
+        exit(EXIT_FAILURE);
+    }
 
-	new_node->n = value;
-	new_node->prev = NULL;
-	new_node->next = *stack;
+    new->prev = NULL;
+    new->n = val;
+    new->next = NULL;
 
-	if (*stack)
-	{
-		(*stack)->prev = new_node;
-	}
-
-	*stack = new_node;
+    if (mode == STACK) /* Push onto stack */
+    {
+        if (!*top)
+            *top = new;
+        else
+        {
+            new->next = *top;
+            (*top)->prev = new;
+            *top = new;
+        }
+    }
+    else if (mode == QUEUE) /* Push to the back of the queue */
+    {
+        stack_t *temp = *top;
+        if (!temp)
+        {
+            *top = new;
+        }
+        else
+        {
+            while (temp->next)
+                temp = temp->next;
+            temp->next = new;
+            new->prev = temp;
+        }
+    }
 }
 
 /**
